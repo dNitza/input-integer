@@ -1,0 +1,22 @@
+{
+    "name": "input-integer",
+    "version": "0.0.0",
+    "authors": [
+        "Daniel Nitsikopoulos <dnitza@gmail.com>"
+    ],
+    "description": "A more usable integer input",
+    "license": "MIT",
+    "main": "dist/input-integer.html",
+    "keywords": [
+        "polymer",
+        "web-components"
+    ],
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components"
+    ],
+    "dependencies": {
+        "polymer": "Polymer/polymer#^0.5.1"
+    }
+}

@@ -1,0 +1,73 @@
+<link rel="import" href="../src/bower_components/polymer/polymer.html">
+<link rel="import" href="../polymer/polymer.html">
+
+<polymer-element name="input-integer">
+    <template>
+        <style>
+        :host {
+          display: block;
+          width: 100%;
+        }
+        #input-integer {
+          margin-bottom: 30px;
+          text-align: right;
+        }
+        </style>
+        <button on-click="{{decrement}}">-</button>
+        <input id="input-integer" type="text" pattern="\d*" value="{{value}}" on-mousewheel="{{scrolling}}" on-keydown="{{keypress}}"/>
+        <button on-click="{{increment}}">+</button>
+    </template>
+
+    <content></content>
+    <script>
+        Polymer('input-integer', {
+            input: '',
+
+            domReady: function() {
+                this.value = this.getAttribute('value') || this.value;
+                this.max = this.getAttribute('max') || this.max;
+                this.min = this.getAttribute('min') || this.min;
+            },
+
+            value: 0,
+
+            max: Number.POSITIVE_INFINITY,
+
+            min: Number.NEGATIVE_INFINITY,
+
+            increment: function(e, detail, sender){
+                if( ! this.value){this.value = 0}
+                if(this.value < this.max){
+                    this.value += 1;
+                }
+            },
+
+            decrement: function(e, detail, sender){
+                if( ! this.value){this.value = 0}
+                if(this.value > this.min){
+                    this.value -= 1;
+                }
+            },
+
+            scrolling: function(e){
+                if(e.deltaY > 0){
+                    this.increment();
+                }
+
+                if(e.deltaY < -1){
+                    this.decrement();
+                }
+            },
+
+            keypress: function(e){
+                if(e.keyCode === 38){
+                    this.increment();
+                }
+                if(e.keyCode === 40){
+                    this.decrement();
+                }
+            }
+        });
+    </script>
+
+</polymer-element>
