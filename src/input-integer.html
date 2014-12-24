@@ -1,51 +1,53 @@
-<link rel="import" href="../src/bower_components/polymer/polymer.html">
+<!-- <link rel="import" href="../src/bower_components/polymer/polymer.html"> -->
 <link rel="import" href="../polymer/polymer.html">
 
-<polymer-element name="input-integer">
+<link rel="import" href="input-integer-increment.html">
+<link rel="import" href="input-integer-decrement.html">
+
+<polymer-element name="input-integer" extends="input" attributes="min max name value pattern">
     <template>
         <style>
         :host {
-          display: block;
-          width: 100%;
+          display: inline-block;
+          border: none;
         }
-        #input-integer {
-          margin-bottom: 30px;
+        #input_integer {
           text-align: right;
         }
         </style>
         <button on-click="{{decrement}}">-</button>
-        <input id="input-integer" type="text" pattern="\d*" value="{{value}}" on-mousewheel="{{scrolling}}" on-keydown="{{keypress}}"/>
+        <input is="core-input" id="input_integer" name="{{name}}" type="text" pattern="{{pattern}}" value="{{value}}" on-mousewheel="{{scrolling}}" on-keydown="{{keypress}}" autocomplete="off"/>
         <button on-click="{{increment}}">+</button>
     </template>
 
-    <content></content>
     <script>
         Polymer('input-integer', {
-            input: '',
+            value: Number(this.value),
+
+            default_max: Number.POSITIVE_INFINITY,
+
+            default_min: Number.NEGATIVE_INFINITY,
 
             domReady: function() {
-                this.value = this.getAttribute('value') || this.value;
-                this.max = this.getAttribute('max') || this.max;
-                this.min = this.getAttribute('min') || this.min;
+                this.$.input_integer.max = this.max || this.default_max;
+                this.$.input_integer.min = this.min || this.default_min;
             },
 
-            value: 0,
-
-            max: Number.POSITIVE_INFINITY,
-
-            min: Number.NEGATIVE_INFINITY,
-
             increment: function(e, detail, sender){
-                if( ! this.value){this.value = 0}
-                if(this.value < this.max){
-                    this.value += 1;
+                if( ! this.$.input_integer.value){this.$.input_integer.value = 0}
+                if(Number(this.$.input_integer.value) < this.$.input_integer.max){
+                    var newVal = Number(this.$.input_integer.value) + 1;
+                    this.$.input_integer.value = newVal;
+                    this.value = newVal;
                 }
             },
 
             decrement: function(e, detail, sender){
-                if( ! this.value){this.value = 0}
-                if(this.value > this.min){
-                    this.value -= 1;
+                if( ! this.$.input_integer.value){this.$.input_integer.value = 0}
+                if(Number(this.$.input_integer.value) > this.$.input_integer.min){
+                    var newVal = Number(this.$.input_integer.value) - 1;
+                    this.$.input_integer.value = newVal;
+                    this.value = newVal;
                 }
             },
 

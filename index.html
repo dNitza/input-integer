@@ -11,15 +11,16 @@
     <link rel="import" href="src/input-integer.html">
 
     <style>
-      #input-integer{
-        color: red;
-      }
+/*      input-integer::shadow button{
+        float: right;
+      }*/
     </style>
 </head>
 <body>
-
-    <!-- Using Custom Elements -->
-    <input-integer min="-10"></input-integer>
-
+  <form method="GET" action="/">
+      <!-- Using Custom Elements -->
+      <input is="input-integer" id="example" min="-20" value="10" name="example" pattern="-?\d*" />
+      <input type="submit"/>
+  </form>
 </body>
 </html>
