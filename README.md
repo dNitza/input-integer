@@ -40,19 +40,25 @@ Or [download as ZIP](https://github.com/dNitza/input-integer/archive/master.zip)
 
 Attribute     | Options     | Default      | Description
 ---           | ---         | ---          | ---
-`foo`         | *string*    | `bar`        | Lorem ipsum dolor.
+`min`         | *string*    | `infinity`        | The minimum value of the field
+`max`         | *string*    | `infinity`        | The maximum value of the field.
+`name`         | *string*    | ``        | The name of the field.
+`value`         | *string*    | ``        | The value of the field.
+`pattern`         | *string*    | ``        | The pattern this field must adhere to in order to be valid.
 
 ## Methods
 
 Method        | Parameters   | Returns     | Description
 ---           | ---          | ---         | ---
-`unicorn()`   | None.        | Nothing.    | Magic stuff appears.
+`increment()`   | None.        | Nothing.    | Increments the value of the field by 1.
+`decrement()`   | None.        | Nothing.    | Decrements the value of the field by 1.
 
 ## Events
 
 Event         | Description
 ---           | ---
-`onsomething` | Triggers when something happens.
+`on-scroll` | Increments or decrements depending on scroll direction.
+`on-keydown` | Increments when up is pressed, decrements when down is pressed.
 
 ## Development
 
